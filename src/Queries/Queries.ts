@@ -1,19 +1,19 @@
 import { gql } from 'urql';
 
 
-export const GET_POST = gql`
-query ($options: PageQueryOptions) {
-  posts(options: $options) {
-    data {
-      id
-      title
-      body
-      user {
+export const GET_ALL_POSTS = gql`
+  query {
+    posts {
+      data {
         id
+        title
+        body
+        user {
+          id
+        }
       }
     }
   }
-}
 `;
 
 
@@ -25,6 +25,16 @@ mutation ( $input: CreatePostInput! ) {
     body
   }
 }
+`;
+
+export const UPDATE_POST = gql`
+  mutation ($id: ID!, $input: UpdatePostInput!) {
+    updatePost(id: $id, input: $input) {
+      id
+      title
+      body
+    }
+  }
 `;
 
 
